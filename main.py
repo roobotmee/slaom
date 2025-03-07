@@ -3,16 +3,15 @@ from telethon.tl.functions.account import UpdateProfileRequest
 from datetime import datetime, timedelta, timezone
 import asyncio
 
-API_ID = "28045735"
-API_HASH = "f1eb1969ff9a1f9c8b8bbbbb752cb7ae"
-Phone = "+998938100804"
+API_ID = "20833513"
+API_HASH = "dc124b69d34bd7dd19cd7539769d27ef"
 
-client = TelegramClient("Akmaljon", API_ID, API_HASH)
+client = TelegramClient("userbot", API_ID, API_HASH)
 
 async def update_nickname():
     while True:
-        now = datetime.now(timezone.utc) + timedelta(hours=5, minutes=0.55)
-        new_name = f" 𝗥𝗼𝘁𝗮𝘁𝘂𝘆  | {now.strftime('%H:%M')} | "
+        now = datetime.now(timezone.utc) + timedelta(hours=5, minutes=0.55)  
+        new_name = f" ❮꯭❶꯭꯭꯭➣꯭ ᴢᴀʀɪғᴊᴏɴ ꯭꯭•꯭|꯭🖤  | {now.strftime('%H:%M')} | "
         try:
             await client(UpdateProfileRequest(first_name=new_name))
             print(f"Nik yangilandi: {new_name}")
@@ -21,46 +20,45 @@ async def update_nickname():
         await asyncio.sleep(60)
 
 responses = {
-    "Nima gap ukam": "raxmat tinchu oʻzizdachi",
-    "nima gap": "raxmat tinchu oʻzizdachi",
-    "pubgga kiryapsimi": "yo vaht bolmayapti aka(uka)",
-    "qales": "zoʼr xudoga shukur",
-    "qalisiz": "zoʼr xudoga shukur",
-    "Cal off dutyga qachon oʻynemiz": "vaqt bolmayaptida oʻqshla bn",
-    "Akmaljon uka yaxshimisz": "xa raxmat aka xudoga shukur",
-    "rasmga olib tashlavoring": "xop xaliroq",
-    "rasm": "xop xaliroq tashlavoraman",
-    "Clashga kiryapsimi": "xa bazida",
-    "qaydasan": "tinchlikmi axr",
-    "ha tinchlik": "xaa",
-    "qachon kelasan": "aniqmas"
+        "salom": " salom nima yordam kerak? " ,
+        "assalomu alekum": " vaalekum assalom nima xizmat? " ,
+        "yaxshimisiz": " men hozir online emasman knroq yoza olasizmi? " ,
+        "nima gap": " tincu ozizdachi " ,
+        "nomerizi berin": " 90-851-17-37 " ,
+        "zarifjon yaxshimisz": " yaxshi rahmat ozizngiz yaxshimi? " ,
+        "sizda bir gapim bor edi": " hozir band edim keyinroq yoza olasizmi? " ,
+        "qalesan": " yaxshi ozin qalesan nima gaplar? " ,
+        "kartenda qancha bor": " pulim yoq " ,
+        "kartenda qancha pulin bor?": " pulim yo ozindan so'ramoqchi bop yurodim " ,
+        "kelyapsmi?": " yoq azgina mazam yog'idi " ,
+        "qachon kelas": " mazam yoq bugun boromiman " ,
+        "kelyapsanmi": " tel qil hozir yozomiman " ,
+        "pubg kirasmi?": " yoq darslarim bor  " ,
+        "boshmidiz?": " yoq hozir band edim tinchlikmi? " ,
 }
 
 @client.on(events.NewMessage)
 async def message_handler(event):
     if event.is_private:
-        me = await client.get_me()
-        if event.sender_id != me.id:
-            text = event.raw_text.lower()
+        me = await client.get_me()  
+        if event.sender_id != me.id:  
+            text = event.raw_text.lower()  
             
 
             if text.startswith('/del'):
 
                 await client.delete_messages(event.chat_id, [event.id])
-                return
+                return  
             
             for question, answer in responses.items():
-                if text.strip() == question.lower():
+                if text.strip() == question.lower():  
                     await event.reply(answer)
                     break
 
-
-        
-        
-        @client.on(events.NewMessage(pattern="/bot"))
-        async def start_handler(event):
-            if event.is_private:
-                await event.reply("Bot Ishga tushdi va ishlamoqda ")
+@client.on(events.NewMessage(pattern="/start"))
+async def start_handler(event):
+    if event.is_private:
+        await event.reply("Bot ishga tushdi!")
         
         
 @client.on(events.NewMessage(pattern="/del"))
